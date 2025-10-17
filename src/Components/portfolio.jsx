@@ -19,6 +19,23 @@ const menuItems = [
 ];
 
 const Portfolio = () => {
+  // Test function to debug link issues
+  const handleProjectClick = (url, projectName) => {
+    console.log(`Attempting to open ${projectName}: ${url}`);
+    try {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!newWindow) {
+        console.log('Popup blocked - trying location.href');
+        window.location.href = url;
+      } else {
+        console.log('Successfully opened in new window');
+      }
+    } catch (error) {
+      console.error('Error opening link:', error);
+      // Fallback - direct navigation
+      window.location.href = url;
+    }
+  };
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isLoading, setIsLoading] = useState(true);
@@ -459,15 +476,16 @@ const Portfolio = () => {
             {/* Redux Toolkit */}
             <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <img src={redux} className="h-20 mx-auto" />
+              <img src={redux} className="h-20 mx-auto" alt="Redux Toolkit" />
               <h3 className="text-white font-semibold text-center text-sm sm:text-base">
                 Redux Toolkit
               </h3>
             </div>
+            
             {/* Zustand */}
             <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <img src={zustandimg} className="h-20 w-40 mx-auto rounded-lg " />
+              <img src={zustandimg} className="h-20 w-40 mx-auto rounded-lg" alt="Zustand" />
               <h3 className="text-white font-semibold text-center text-sm sm:text-base">
                 Zustand
               </h3>
@@ -477,234 +495,378 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-16 lg:py-20 relative" id="projects">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Featured{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Projects
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full"></div>
+      <section className="py-20 lg:py-32 relative overflow-hidden" id="projects">
+        {/* Background Animation */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 -left-4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 -right-4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Header */}
+          <div className="text-center mb-16 lg:mb-20">
+            <div className="inline-block">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400 mb-6 tracking-tight">
+                Featured
+                <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+                  Projects
+                </span>
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mx-auto rounded-full shadow-lg shadow-purple-500/50"></div>
+            </div>
+            <p className="text-gray-300 text-lg sm:text-xl mt-8 max-w-3xl mx-auto leading-relaxed">
+              Discover my latest work showcasing modern web development, innovative design, and cutting-edge technologies.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
-            {/* Project 1 */}
-            <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative overflow-hidden">
-                <img
-                  src={carmechanics}
-                  alt="Hindustan Car Mechanics"
-                  className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-purple-500/80 text-white text-xs sm:text-sm rounded-full">
-                      React Js
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Project 1 - Hindustan Car Mechanics */}
+            <div className="group relative">
+              {/* Card Container */}
+              <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 transition-all duration-700 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
+                
+                {/* Glowing Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Project Image */}
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
+                  <img
+                    src={carmechanics}
+                    alt="Hindustan Car Mechanics"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    onClick={() => handleProjectClick('https://hindustancarmechanics.netlify.app', 'Hindustan Car Mechanics')}
+                  />
+                  
+                  {/* Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  
+                  {/* Tech Stack Tags */}
+                  <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    <span className="px-3 py-1.5 bg-purple-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-purple-400/50">
+                      ⚛️ React.js
                     </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-blue-500/80 text-white text-xs sm:text-sm rounded-full">
-                      Tailwind CSS
+                    <span className="px-3 py-1.5 bg-blue-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-blue-400/50">
+                      🎨 Tailwind CSS
                     </span>
                   </div>
+                  
+                  {/* Quick View Button */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <button
+                      onClick={() => handleProjectClick('https://hindustancarmechanics.netlify.app', 'Hindustan Car Mechanics')}
+                      className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  Hindustan Car Mechanics
-                </h3>
-                <p className="text-gray-400 mb-4 text-xs sm:text-sm">
-                  Professional car service website with modern design and
-                  responsive layout.
-                </p>
-                <a
-                  href="https://hindustancarmechanics.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex cursor-pointer items-center gap-2 text-purple-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
-                >
-                  View Project
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                
+                {/* Content */}
+                <div className="p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
+                      Hindustan Car Mechanics
+                    </h3>
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                      Professional automotive service platform featuring modern design, responsive layouts, and seamless user experience for car maintenance booking.
+                    </p>
+                  </div>
+                  
+                  {/* Features */}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Responsive Design
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Modern UI/UX
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        Fast Performance
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => handleProjectClick('https://hindustancarmechanics.netlify.app', 'Hindustan Car Mechanics')}
+                      className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span>View Live Site</span>
+                        <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                    
+                    
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Project 2 */}
-            <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative overflow-hidden">
-                <img
-                  src={ssplusit}
-                  alt="SS Plus IT Project"
-                  className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-blue-500/80 text-white text-xs sm:text-sm rounded-full">
-                      React Js
+            {/* Project 2 - SS Plus IT Education */}
+            <div className="group relative">
+              <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 transition-all duration-700 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
+                
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
+                  <img
+                    src={ssplusit}
+                    alt="SS Plus IT Education"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    onClick={() => handleProjectClick('https://education-beta-ten.vercel.app', 'SS Plus IT Education')}
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  
+                  <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    <span className="px-3 py-1.5 bg-blue-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-blue-400/50">
+                      ⚛️ React.js
                     </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-green-500/80 text-white text-xs sm:text-sm rounded-full">
-                      Css
+                    <span className="px-3 py-1.5 bg-green-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-green-400/50">
+                      💫 CSS3
                     </span>
                   </div>
+                  
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <button
+                      onClick={() => handleProjectClick('https://education-beta-ten.vercel.app', 'SS Plus IT Education')}
+                      className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  SS Plus IT Education
-                </h3>
-                <p className="text-gray-400 mb-4 text-xs sm:text-sm">
-                  Educational platform with interactive features and modern user
-                  interface.
-                </p>
-                <a
-                  href="https://education-beta-ten.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex cursor-pointer items-center gap-2 text-blue-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
-                >
-                  View Project
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                
+                <div className="p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
+                      SS Plus IT Education
+                    </h3>
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                      Interactive educational platform designed for modern learning experiences with engaging UI and comprehensive course management features.
+                    </p>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Interactive Learning
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Course Management
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                        Student Portal
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => handleProjectClick('https://education-beta-ten.vercel.app', 'SS Plus IT Education')}
+                      className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span>View Live Site</span>
+                        <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                    </button>
+                    
+                    
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Project 3 */}
-            <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-green-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative overflow-hidden">
-                <img
-                  src={diamondpublicschool}
-                  alt="Diamond Public School"
-                  className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-green-500/80 text-white text-xs sm:text-sm rounded-full">
-                      HTML , CSS, JavaScript
+            {/* Project 3 - Diamond Public School */}
+            <div className="group relative">
+              <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 transition-all duration-700 hover:border-green-500/50 hover:shadow-2xl hover:shadow-green-500/20 hover:-translate-y-2">
+                
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
+                  <img
+                    src={diamondpublicschool}
+                    alt="Diamond Public School"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    onClick={() => handleProjectClick('https://diamondpublicschool.vercel.app', 'Diamond Public School')}
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  
+                  <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    <span className="px-3 py-1.5 bg-orange-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-orange-400/50">
+                      🌐 HTML/CSS
                     </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-teal-500/80 text-white text-xs sm:text-sm rounded-full">
-                      jQuery
+                    <span className="px-3 py-1.5 bg-yellow-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-yellow-400/50">
+                      ⚡ JavaScript
+                    </span>
+                    <span className="px-3 py-1.5 bg-teal-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-teal-400/50">
+                      📦 jQuery
                     </span>
                   </div>
+                  
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <button
+                      onClick={() => handleProjectClick('https://diamondpublicschool.vercel.app', 'Diamond Public School')}
+                      className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  Diamond Public School
-                </h3>
-                <p className="text-gray-400 mb-4 text-xs sm:text-sm">
-                  School website with comprehensive information and elegant
-                  design.
-                </p>
-                <a
-                  href="https://diamondpublicschool.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex cursor-pointer items-center gap-2 text-green-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
-                >
-                  View Project
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                
+                <div className="p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-green-300 transition-colors duration-300">
+                      Diamond Public School
+                    </h3>
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                      Comprehensive educational institution website featuring elegant design, detailed information architecture, and user-friendly navigation.
+                    </p>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        School Management
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Information Portal
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        Classic Design
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => handleProjectClick('https://diamondpublicschool.vercel.app', 'Diamond Public School')}
+                      className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 hover:scale-105"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span>View Live Site</span>
+                        <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                    </button>
+                    
+                    
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Project 4 */}
-            <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative overflow-hidden">
-                <img
-                  src={ecommerce}
-                  alt="E-commerce Project"
-                  className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-pink-500/80 text-white text-xs sm:text-sm rounded-full">
-                      React JS
+            {/* Project 4 - E-commerce Platform */}
+            <div className="group relative">
+              <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 transition-all duration-700 hover:border-pink-500/50 hover:shadow-2xl hover:shadow-pink-500/20 hover:-translate-y-2">
+                
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
+                  <img
+                    src={ecommerce}
+                    alt="E-commerce Platform"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    onClick={() => handleProjectClick('https://medium-eccommerce.netlify.app', 'E-commerce Platform')}
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  
+                  <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    <span className="px-3 py-1.5 bg-pink-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-pink-400/50">
+                      ⚛️ React.js
                     </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-red-500/80 text-white text-xs sm:text-sm rounded-full">
-                      Tailwind CSS
+                    <span className="px-3 py-1.5 bg-purple-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-purple-400/50">
+                      🔧 Redux Toolkit
                     </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-red-500/80 text-white text-xs sm:text-sm rounded-full">
-                      Redux Tool kit
-                    </span>
-                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-red-500/80 text-white text-xs sm:text-sm rounded-full">
-                      Zustand
+                    <span className="px-3 py-1.5 bg-blue-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-blue-400/50">
+                      📦 Zustand
                     </span>
                   </div>
+                  
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <button
+                      onClick={() => handleProjectClick('https://medium-eccommerce.netlify.app', 'E-commerce Platform')}
+                      className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  E-commerce Platform
-                </h3>
-                <p className="text-gray-400 mb-4 text-xs sm:text-sm">
-                  Full-featured e-commerce application with shopping cart and
-                  payment integration.
-                </p>
-                <a
-                  href="https://medium-eccommerce.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex cursor-pointer items-center gap-2 text-pink-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
-                >
-                  View Project
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                
+                <div className="p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors duration-300">
+                      E-commerce Platform
+                    </h3>
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                      Full-stack e-commerce solution with advanced state management, shopping cart functionality, and seamless payment integration.
+                    </p>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                        Shopping Cart
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        State Management
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Payment Integration
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => handleProjectClick('https://medium-eccommerce.netlify.app', 'E-commerce Platform')}
+                      className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 hover:scale-105"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span>View Live Site</span>
+                        <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                    </button>
+                    
+                    
+                  </div>
+                </div>
               </div>
             </div>
           </div>

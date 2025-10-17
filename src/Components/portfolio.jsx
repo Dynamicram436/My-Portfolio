@@ -523,7 +523,7 @@ const Portfolio = () => {
                   href="https://hindustancarmechanics.netlify.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-purple-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
+                  className="inline-flex cursor-pointer items-center gap-2 text-purple-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
                 >
                   View Project
                   <svg
@@ -576,7 +576,7 @@ const Portfolio = () => {
                   href="https://education-beta-ten.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
+                  className="inline-flex cursor-pointer items-center gap-2 text-blue-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
                 >
                   View Project
                   <svg
@@ -629,7 +629,7 @@ const Portfolio = () => {
                   href="https://diamondpublicschool.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-green-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
+                  className="inline-flex cursor-pointer items-center gap-2 text-green-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
                 >
                   View Project
                   <svg
@@ -688,7 +688,7 @@ const Portfolio = () => {
                   href="https://medium-eccommerce.netlify.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-pink-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
+                  className="inline-flex cursor-pointer items-center gap-2 text-pink-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
                 >
                   View Project
                   <svg

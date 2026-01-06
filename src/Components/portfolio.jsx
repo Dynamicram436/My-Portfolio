@@ -13,6 +13,7 @@ import Nextjsimg from "../Images/Next.js.png";
 import Nodejsimg from "../Images/Nodejs.png";
 import Expressjsimg from "../Images/Express js.png";
 import MongoDBimg from "../Images/MongoDB.png";
+import Taskflowimg from "../Images/Taskflow.png"
 
 const menuItems = [
   { name: "Home", href: "#" },
@@ -265,7 +266,7 @@ const Portfolio = () => {
             <div className="space-y-6 order-1 lg:order-2">
               <div className="prose prose-lg text-gray-600">
                 <p className="text-lg sm:text-xl leading-relaxed first-letter:text-4xl sm:first-letter:text-6xl first-letter:font-bold first-letter:text-blue-600 first-letter:float-left first-letter:mr-3 first-letter:mt-1">
-                  I'm a passionate Front-End Web Developer with 1.3+ years of
+                  I'm a passionate Front-End Web Developer with 1.5 years of
                   hands-on experience developing web applications with HTML,
                   CSS, Tailwind CSS, JavaScript, and React JS technologies.
                 </p>
@@ -281,7 +282,7 @@ const Portfolio = () => {
               <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 lg:mt-8">
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-200/50 hover:border-blue-400/50 transition-all duration-300 shadow-sm">
                   <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
-                    1.3+
+                    1.5
                   </h4>
                   <p className="text-gray-600 text-sm sm:text-base">
                     Years Experience
@@ -289,7 +290,7 @@ const Portfolio = () => {
                 </div>
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-200/50 hover:border-purple-400/50 transition-all duration-300 shadow-sm">
                   <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
-                    4
+                    4 +
                   </h4>
                   <p className="text-gray-600 text-sm sm:text-base">
                     Projects Completed
@@ -995,6 +996,118 @@ const Portfolio = () => {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
                       href="https://medium-eccommerce.netlify.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 hover:scale-105 text-center"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span>View Live Site</span>
+                        <svg
+                          className="w-4 h-4 transition-transform group-hover/btn:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Project 5 - Task Flow Project */}
+            <div className="group relative">
+              <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 transition-all duration-700 hover:border-pink-500/50 hover:shadow-2xl hover:shadow-pink-500/20 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
+                  <a
+                    href="https://nextjstaskflow.netlify.app/Dashboard/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
+                    <img
+                      src={Taskflowimg}
+                      alt="Task-Flow Project"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+
+                    <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                      <span className="px-3 py-1.5 bg-pink-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-pink-400/50">
+                         Next.Js
+                      </span>
+                      <span className="px-3 py-1.5 bg-purple-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-purple-400/50">
+                        🔧 Node.Js
+                      </span>
+                      <span className="px-3 py-1.5 bg-blue-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-blue-400/50">
+                        📦 Zustand
+                      </span>
+                    </div>
+
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                      <span className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white transition-all duration-300 hover:scale-110">
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+
+                <div className="p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors duration-300">
+                      Task-Flow Project
+                    </h3>
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                      Task-Flow is a full-stack application built with Next.js,
+                      React Js, and Node.js. It provides a user-friendly
+                      interface for managing tasks, with features such as task
+                      creation, editing, and deletion.
+
+                    </p>
+                  </div>
+
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                        Dashboard
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        State Management
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Authentication
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a
+                      href="https://nextjstaskflow.netlify.app/Dashboard/dashboard"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 hover:scale-105 text-center"

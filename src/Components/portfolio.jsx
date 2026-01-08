@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import profile from "../Images/Bram8.jpg";
 import profile2 from "../Images/Bharagavram.jpeg";
 import carmechanics from "../Images/hindustan-mechanics.png";
@@ -31,6 +33,16 @@ const Portfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false,
+      offset: 100,
+      delay: 0,
+    });
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
@@ -98,19 +110,20 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen relative overflow-x-hidden">
+    <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 min-h-screen relative overflow-x-hidden text-gray-900">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -inset-10 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/5 left-1/6 w-64 h-64 bg-emerald-500/40 rounded-full mix-blend-multiply blur-3xl animate-blob"></div>
+          <div className="absolute top-1/3 right-1/5 w-72 h-72 bg-amber-500/40 rounded-full mix-blend-multiply blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-rose-500/40 rounded-full mix-blend-multiply blur-3xl animate-blob animation-delay-4000"></div>
         </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.08),transparent_25%),radial-gradient(circle_at_80%_0%,rgba(245,158,11,0.08),transparent_28%),radial-gradient(circle_at_50%_80%,rgba(244,63,94,0.08),transparent_30%)]"></div>
       </div>
 
       {/* Custom Cursor */}
       <div
-        className="fixed w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-multiply transition-all duration-150 ease-out"
+        className="fixed w-6 h-6 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full pointer-events-none z-50 mix-blend-multiply transition-all duration-150 ease-out shadow-[0_0_25px_rgba(16,185,129,0.5)]"
         style={{
           left: mousePosition.x - 12,
           top: mousePosition.y - 12,
@@ -122,26 +135,30 @@ const Portfolio = () => {
       <header
         className={`fixed w-full top-0 left-0 z-40 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/90 backdrop-blur-md border-b border-gray-200 py-4 shadow-sm"
+            ? "bg-amber-50/80 backdrop-blur-xl border-b border-emerald-500/20 py-4 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.6)]"
             : "bg-transparent py-6"
         }`}
       >
         <nav className="container mx-auto px-4 sm:px-6">
           <ul className="flex justify-center items-center gap-4 sm:gap-6 lg:gap-8">
-            {menuItems.map((item) => (
-              <li key={item.name}>
+            {menuItems.map((item, index) => (
+              <li
+                key={item.name}
+                data-aos="fade-down"
+                data-aos-delay={index * 100}
+              >
                 <a
                   href={item.href}
                   onClick={(e) => smoothScroll(e, item.href)}
-                  className={`relative text-sm lg:text-base font-medium transition-all duration-300 hover:text-blue-600 group ${
+                  className={`relative text-sm lg:text-base font-medium transition-all duration-300 hover:text-emerald-600 group ${
                     activeSection ===
                     (item.href === "#" ? "home" : item.href.slice(1))
-                      ? "text-blue-600"
-                      : "text-gray-600"
+                      ? "text-emerald-600"
+                      : "text-gray-700"
                   }`}
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-amber-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
               </li>
             ))}
@@ -152,17 +169,18 @@ const Portfolio = () => {
       {/* Hero Section */}
       <main className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-8">
         <div className="container max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white/70 backdrop-blur-xl border border-white/60 shadow-2xl shadow-blue-100 rounded-3xl p-6 sm:p-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white/60 backdrop-blur-2xl border border-emerald-500/10 shadow-[0_25px_70px_-30px_rgba(0,0,0,0.8)] rounded-3xl p-6 sm:p-10">
             {/* Bio-Data Section */}
             <div className="text-center lg:text-left space-y-6 lg:space-y-8 animate-fadeInUp">
               <div className="relative inline-block mx-auto lg:mx-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
                 <img
+                  data-aos="zoom-in-up"
                   src={profile}
                   alt="Bhargav Ram"
-                  className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-64 lg:h-64 xl:w-72 xl:h-72 rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-500 hover:rotate-3 mx-auto"
+                  className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-64 lg:h-64 xl:w-72 xl:h-72 rounded-full object-cover border-4 border-white shadow-2xl shadow-emerald-500/30 transform hover:scale-105 transition-all duration-500 hover:rotate-3 mx-auto"
                 />
-                <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
                   <span className="text-white text-lg sm:text-xl lg:text-2xl">
                     👋
                   </span>
@@ -180,7 +198,7 @@ const Portfolio = () => {
                   </span> */}
                   <SplitText
                     text="Hi, I'm Bhargav Ram"
-                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text  text-purple-600"
+                    className="bg-gradient-to-r from-emerald-600 via-amber-600 to-rose-600 bg-clip-text text-transparent"
                     delay={100}
                     duration={0.6}
                     ease="power3.out"
@@ -198,7 +216,7 @@ const Portfolio = () => {
                   <span className="typing-animation">Frontend Developer</span>
                 </div>
 
-                <p className="text-base sm:text-lg text-gray-500 max-w-xl leading-relaxed mx-auto lg:mx-0">
+                <p className="text-base sm:text-lg text-gray-700 max-w-xl leading-relaxed mx-auto lg:mx-0">
                   I specialize in creating modern, responsive, and user-friendly
                   web applications that bring ideas to life with cutting-edge
                   technology.
@@ -208,7 +226,7 @@ const Portfolio = () => {
                   <a
                     href={Resume}
                     download="BhargavRam_Resume.pdf"
-                    className="group relative inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-full overflow-hidden shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
+                    className="group relative inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-600 rounded-full overflow-hidden shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       <svg
@@ -226,13 +244,13 @@ const Portfolio = () => {
                       </svg>
                       Download CV
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-rose-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   </a>
 
                   <a
                     href="#contact"
                     onClick={(e) => smoothScroll(e, "#contact")}
-                    className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-blue-600 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-400/25"
+                    className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-emerald-600 border-2 border-emerald-500 rounded-full hover:bg-emerald-500/90 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25"
                   >
                     Get In Touch
                   </a>
@@ -243,7 +261,7 @@ const Portfolio = () => {
             {/* Animation Section */}
             <div className="flex justify-center items-center mt-8 lg:mt-0">
               <div className="relative w-full max-w-md lg:max-w-full">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-3xl animate-pulse"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-amber-500/20 rounded-3xl blur-3xl animate-pulse"></div>
                 <DotLottieReact
                   className="relative w-full h-[280px] sm:h-[350px] lg:h-[400px] xl:h-[500px] rounded-3xl shadow-2xl"
                   src="https://lottie.host/e2478295-dc38-491e-999e-d856243072a3/UAcUeuyIcv.lottie"
@@ -258,39 +276,46 @@ const Portfolio = () => {
 
       {/* About Section */}
       <section
-        className="py-16 lg:py-20 relative bg-white/60 backdrop-blur-sm"
+        className="py-16 lg:py-20 relative bg-gradient-to-b from-amber-50 via-orange-50 to-red-50"
         id="about"
       >
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               About{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-500 to-amber-500 bg-clip-text text-transparent">
                 Me
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center bg-white/70 border border-gray-200/60 rounded-3xl shadow-xl shadow-blue-50 p-6 sm:p-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center bg-white/70 border border-emerald-500/10 rounded-3xl shadow-[0_25px_70px_-30px_rgba(0,0,0,0.8)] p-6 sm:p-10">
             <div className="relative group order-2 lg:order-1">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-amber-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
               <img
+                data-aos="flip-left"
                 src={profile2}
                 alt="Bhargav Ram"
-                className="relative w-full h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[400px] xl:w-[500px] object-fill rounded-3xl shadow-2xl transform group-hover:scale-105 transition-all duration-500 mx-auto"
+                className="relative w-full h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[400px] xl:w-[500px] object-fill rounded-3xl shadow-2xl shadow-emerald-500/30 transform group-hover:scale-105 transition-all duration-500 mx-auto"
               />
             </div>
 
             <div className="space-y-6 order-1 lg:order-2">
-              <div className="prose prose-lg text-gray-600">
-                <p className="text-lg sm:text-xl leading-relaxed first-letter:text-4xl sm:first-letter:text-6xl first-letter:font-bold first-letter:text-blue-600 first-letter:float-left first-letter:mr-3 first-letter:mt-1">
+              <div className="prose prose-lg text-gray-700">
+                <p
+                  data-aos="fade-left"
+                  className="text-lg sm:text-xl leading-relaxed first-letter:text-4xl sm:first-letter:text-6xl first-letter:font-bold first-letter:text-emerald-500 first-letter:float-left first-letter:mr-3 first-letter:mt-1"
+                >
                   I'm a passionate Front-End Web Developer with 1.5 years of
                   hands-on experience developing web applications with HTML,
                   CSS, Tailwind CSS, JavaScript, and React JS technologies.
                 </p>
 
-                <p className="text-base sm:text-lg leading-relaxed mt-4">
+                <p
+                  data-aos="fade-right"
+                  className="text-base sm:text-lg leading-relaxed mt-4 text-gray-600"
+                >
                   I am strongly interested in learning new technologies and
                   implementing them in my projects. I'm a self-motivated and
                   hardworking individual who is always ready to learn new things
@@ -299,16 +324,22 @@ const Portfolio = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 lg:mt-8">
-                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-blue-200/50 hover:border-blue-400/50 transition-all duration-300 shadow-sm">
-                  <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
+                <div
+                  data-aos="fade-up"
+                  className="bg-emerald-50/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-500/20 hover:border-emerald-400/50 transition-all duration-300 shadow-sm shadow-emerald-500/10"
+                >
+                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                     1.5
                   </h4>
                   <p className="text-gray-600 text-sm sm:text-base">
                     Years Experience
                   </p>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-200/50 hover:border-purple-400/50 transition-all duration-300 shadow-sm">
-                  <h4 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
+                <div
+                  data-aos="fade-down"
+                  className="bg-amber-50/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-amber-500/20 hover:border-amber-400/50 transition-all duration-300 shadow-sm shadow-amber-500/10"
+                >
+                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                     4 +
                   </h4>
                   <p className="text-gray-600 text-sm sm:text-base">
@@ -323,23 +354,26 @@ const Portfolio = () => {
 
       {/* Skills Section */}
       <section
-        className="py-16 lg:py-20 relative bg-gradient-to-r from-blue-50/70 to-purple-50/70"
+        className="py-16 lg:py-20 relative bg-gradient-to-r from-amber-50 via-orange-50 to-red-50"
         id="skills"
       >
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               My{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-500 to-amber-500 bg-clip-text text-transparent">
                 Skills
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 bg-white/70 border border-gray-200/70 rounded-3xl p-4 sm:p-6 shadow-lg shadow-blue-50">
+          <div
+            data-aos="fade-left"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 bg-white/60 border border-emerald-500/10 rounded-3xl p-4 sm:p-6 shadow-[0_25px_70px_-30px_rgba(0,0,0,0.8)]"
+          >
             {/* HTML */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-orange-200/50 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/25">
+            <div className="group relative bg-orange-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-orange-200/50 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
@@ -368,7 +402,7 @@ const Portfolio = () => {
             </div>
 
             {/* CSS */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-blue-200/50 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-blue-500/25">
+            <div className="group relative bg-blue-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-blue-200/50 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-blue-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
@@ -405,7 +439,7 @@ const Portfolio = () => {
             </div>
 
             {/* Tailwind */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-teal-200/50 hover:border-teal-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-teal-500/25">
+            <div className="group relative bg-teal-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-teal-200/50 hover:border-teal-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-teal-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
@@ -426,7 +460,7 @@ const Portfolio = () => {
             </div>
 
             {/* JavaScript */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-yellow-200/50 hover:border-yellow-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/25">
+            <div className="group relative bg-yellow-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-yellow-200/50 hover:border-yellow-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
@@ -447,7 +481,7 @@ const Portfolio = () => {
             </div>
 
             {/* React */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-cyan-200/50 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-cyan-500/25">
+            <div className="group relative bg-cyan-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-cyan-200/50 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-cyan-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
@@ -464,8 +498,8 @@ const Portfolio = () => {
             </div>
 
             {/* Firebase */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-orange-200/50 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-yellow-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="group relative bg-amber-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-amber-200/50 hover:border-amber-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-amber-500/25">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-yellow-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <svg
                 viewBox="0 0 128 128"
                 className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 relative z-10"
@@ -489,7 +523,7 @@ const Portfolio = () => {
             </div>
 
             {/* Redux Toolkit */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-purple-200/50 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25">
+            <div className="group relative bg-purple-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-purple-200/50 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img src={redux} className="h-20 mx-auto" alt="Redux Toolkit" />
               <h3 className="text-gray-800 font-semibold text-center text-sm sm:text-base">
@@ -498,8 +532,8 @@ const Portfolio = () => {
             </div>
 
             {/* Zustand */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-purple-200/50 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="group relative bg-indigo-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-indigo-200/50 hover:border-indigo-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-indigo-500/25">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img
                 src={zustandimg}
                 className="h-20 w-40 mx-auto rounded-lg"
@@ -511,8 +545,8 @@ const Portfolio = () => {
             </div>
 
             {/* Next.js */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-gray-200/50 hover:border-gray-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-gray-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-white/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="group relative bg-gray-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-gray-200/50 hover:border-gray-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-gray-500/25">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-slate-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img
                 src={Nextjsimg}
                 className="h-20 w-40 mx-auto rounded-lg"
@@ -524,8 +558,8 @@ const Portfolio = () => {
             </div>
 
             {/* Node.js */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-green-200/50 hover:border-green-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-green-500/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="group relative bg-emerald-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-emerald-200/50 hover:border-emerald-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-emerald-500/25">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img
                 src={Nodejsimg}
                 className="h-20 w-40 mx-auto rounded-lg"
@@ -537,8 +571,8 @@ const Portfolio = () => {
             </div>
 
             {/* Express.js */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-gray-200/50 hover:border-gray-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-gray-400/25">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-300/10 to-gray-600/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="group relative bg-slate-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/50 hover:border-slate-400/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-slate-400/25">
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-300/10 to-slate-600/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img
                 src={Expressjsimg}
                 className="h-20 w-40 mx-auto rounded-lg"
@@ -550,7 +584,7 @@ const Portfolio = () => {
             </div>
 
             {/* MongoDB */}
-            <div className="group relative bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-green-200/50 hover:border-green-600/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-green-600/25">
+            <div className="group relative bg-green-50/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-green-200/50 hover:border-green-600/50 transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-green-600/25">
               <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-green-800/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <img
                 src={MongoDBimg}
@@ -567,29 +601,25 @@ const Portfolio = () => {
 
       {/* Projects Section */}
       <section
-        className="py-20 lg:py-32 relative overflow-hidden bg-white/60 backdrop-blur-sm"
+        className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-amber-50 via-orange-50 to-red-50"
         id="projects"
       >
         {/* Background Animation */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-white/50"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-4 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 -right-4 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.06),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(245,158,11,0.07),transparent_32%),radial-gradient(circle_at_50%_90%,rgba(244,63,94,0.06),transparent_40%)]"></div>
 
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <div className="text-center mb-16 lg:mb-20">
             <div className="inline-block">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600 mb-6 tracking-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-emerald-600 to-amber-600 mb-6 tracking-tight">
                 Featured
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-emerald-600 via-amber-600 to-rose-600 bg-clip-text text-transparent">
                   Projects
                 </span>
               </h2>
-              <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full shadow-lg shadow-blue-500/50"></div>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500 mx-auto rounded-full shadow-lg shadow-emerald-500/40"></div>
             </div>
-            <p className="text-gray-600 text-lg sm:text-xl mt-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-gray-700 text-lg sm:text-xl mt-8 max-w-3xl mx-auto leading-relaxed">
               Discover my latest work showcasing modern web development,
               innovative design, and cutting-edge technologies.
             </p>
@@ -600,9 +630,9 @@ const Portfolio = () => {
             {/* Project 1 - Hindustan Car Mechanics */}
             <div className="group relative">
               {/* Card Container */}
-              <div className="relative bg-gradient-to-br from-white/70 to-gray-50/70 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-200/50 transition-all duration-700 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
+              <div className="relative bg-gradient-to-br from-white/80 to-amber-50/80 backdrop-blur-xl rounded-3xl overflow-hidden border border-emerald-200/50 transition-all duration-700 hover:border-emerald-400/50 hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-2">
                 {/* Glowing Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 {/* Project Image */}
                 <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
@@ -619,14 +649,14 @@ const Portfolio = () => {
                     />
 
                     {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-800/80 via-gray-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
                     {/* Tech Stack Tags */}
                     <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
-                      <span className="px-3 py-1.5 bg-blue-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-blue-400/50">
+                      <span className="px-3 py-1.5 bg-emerald-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-emerald-400/50">
                         ⚛️ React.js
                       </span>
-                      <span className="px-3 py-1.5 bg-purple-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-purple-400/50">
+                      <span className="px-3 py-1.5 bg-amber-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-amber-400/50">
                         🎨 Tailwind CSS
                       </span>
                     </div>
@@ -655,7 +685,7 @@ const Portfolio = () => {
                 {/* Content */}
                 <div className="p-6 sm:p-8">
                   <div className="mb-6">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
                       Hindustan Car Mechanics
                     </h3>
                     <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
@@ -669,15 +699,15 @@ const Portfolio = () => {
                   <div className="mb-6">
                     <div className="flex flex-wrap gap-2 text-sm text-gray-500">
                       <span className="flex items-center gap-1">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
                         Responsive Design
                       </span>
                       <span className="flex items-center gap-1">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
                         Modern UI/UX
                       </span>
                       <span className="flex items-center gap-1">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-rose-500 rounded-full"></div>
                         Fast Performance
                       </span>
                     </div>
@@ -1157,26 +1187,26 @@ const Portfolio = () => {
 
       {/* Contact Section */}
       <footer
-        className="py-16 lg:py-20 relative bg-gradient-to-r from-blue-50/60 to-purple-50/60"
+        className="py-16 lg:py-20 relative bg-gradient-to-r from-amber-50 via-orange-50 to-red-50"
         id="contact"
       >
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Get In{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-500 to-amber-500 bg-clip-text text-transparent">
                 Touch
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid lg:grid-cols-4 gap-6 sm:gap-8 bg-white/70 border border-gray-200/70 rounded-3xl shadow-xl shadow-blue-50 p-6 sm:p-8">
+          <div className="grid lg:grid-cols-4 gap-6 sm:gap-8 bg-white/70 border border-emerald-500/10 rounded-3xl shadow-[0_25px_70px_-30px_rgba(0,0,0,0.8)] p-6 sm:p-8">
             {/* Services */}
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1191,16 +1221,16 @@ const Portfolio = () => {
                 Services
               </h3>
               <div className="space-y-2 sm:space-y-3">
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
                   Frontend Web Development
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-amber-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
                   Responsive Web Design
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-rose-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
                   React Applications
                 </div>
               </div>
@@ -1208,9 +1238,9 @@ const Portfolio = () => {
 
             {/* Skills */}
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1225,28 +1255,28 @@ const Portfolio = () => {
                 Technologies
               </h3>
               <div className="space-y-2 sm:space-y-3">
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                   HTML & CSS
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-yellow-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
                   JavaScript & React JS
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-teal-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
                   Tailwind CSS
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-amber-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
                   Firebase
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
                   Redux Tool Kit
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                <div className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition-colors duration-300 text-sm sm:text-base">
+                  <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
                   Zustand
                 </div>
               </div>
@@ -1254,9 +1284,9 @@ const Portfolio = () => {
 
             {/* Contact Info */}
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-green-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1273,10 +1303,10 @@ const Portfolio = () => {
               <div className="space-y-3 sm:space-y-4">
                 <a
                   href="tel:+919014488793"
-                  className="flex items-center gap-3 text-gray-600 hover:text-gray-800 transition-colors duration-300 group text-sm sm:text-base"
+                  className="flex items-center gap-3 text-gray-600 hover:text-emerald-600 transition-colors duration-300 group text-sm sm:text-base"
                 >
                   <svg
-                    className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 group-hover:scale-110 transition-transform duration-300"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 group-hover:scale-110 transition-transform duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -1292,7 +1322,7 @@ const Portfolio = () => {
                 </a>
                 <a
                   href="mailto:bhargavramgomatham@gmail.com"
-                  className="flex items-center gap-3 text-gray-600 hover:text-gray-800 transition-colors duration-300 group text-sm sm:text-base"
+                  className="flex items-center gap-3 text-gray-600 hover:text-amber-600 transition-colors duration-300 group text-sm sm:text-base"
                 >
                   <svg
                     className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:scale-110 transition-transform duration-300"
@@ -1313,10 +1343,10 @@ const Portfolio = () => {
                   href="https://www.linkedin.com/in/bhargavram-gomatham-157816225/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-600 hover:text-gray-800 transition-colors duration-300 group text-sm sm:text-base"
+                  className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 group text-sm sm:text-base"
                 >
                   <svg
-                    className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:scale-110 transition-transform duration-300"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 group-hover:scale-110 transition-transform duration-300"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -1329,9 +1359,9 @@ const Portfolio = () => {
 
             {/* Newsletter */}
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1346,7 +1376,7 @@ const Portfolio = () => {
                 Connect
               </h3>
               <div className="space-y-3 sm:space-y-4">
-                <p className="text-gray-500 text-xs sm:text-sm">
+                <p className="text-gray-600 text-xs sm:text-sm">
                   Let's collaborate and create something amazing together!
                 </p>
                 <form className="space-y-3">
@@ -1354,12 +1384,12 @@ const Portfolio = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/70 border border-gray-300 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-sm sm:text-base"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/70 border border-emerald-500/20 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all duration-300 text-sm sm:text-base"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-xl hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 text-sm sm:text-base"
+                    className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-emerald-500 to-amber-500 text-white font-medium rounded-xl hover:from-emerald-600 hover:to-amber-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 text-sm sm:text-base"
                   >
                     Get In Touch
                   </button>
@@ -1369,7 +1399,7 @@ const Portfolio = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-300 text-center">
+          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-emerald-500/20 text-center">
             <p className="text-gray-600 text-sm sm:text-base">
               © 2024 Bhargav Ram. All rights reserved. Built with ❤️ and React.
             </p>

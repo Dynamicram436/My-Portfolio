@@ -13,7 +13,8 @@ import Nextjsimg from "../Images/Next.js.png";
 import Nodejsimg from "../Images/Nodejs.png";
 import Expressjsimg from "../Images/Express js.png";
 import MongoDBimg from "../Images/MongoDB.png";
-import Taskflowimg from "../Images/Taskflow.png"
+import Taskflowimg from "../Images/Taskflow.png";
+import SplitText from "../Animations/spilttext.jsx";
 
 const menuItems = [
   { name: "Home", href: "#" },
@@ -92,6 +93,10 @@ const Portfolio = () => {
     );
   }
 
+  const handleAnimationComplete = () => {
+    console.log("All letters have animated!");
+  };
+
   return (
     <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen relative overflow-x-hidden">
       {/* Animated Background Elements */}
@@ -166,13 +171,27 @@ const Portfolio = () => {
 
               <div className="space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold">
-                  <span className="bg-gradient-to-r from-gray-700 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  {/* <span className="bg-gradient-to-r from-gray-700 via-blue-600 to-purple-600 bg-clip-text text-transparent">
                     Hi, I'm
                   </span>
                   <br />
                   <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                     Bhargav Ram
-                  </span>
+                  </span> */}
+                  <SplitText
+                    text="Hi, I'm Bhargav Ram"
+                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text  text-purple-600"
+                    delay={100}
+                    duration={0.6}
+                    ease="power3.out"
+                    splitType="chars"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    textAlign="center"
+                    onLetterAnimationComplete={handleAnimationComplete}
+                  />
                 </h1>
 
                 <div className="text-xl sm:text-2xl lg:text-3xl text-gray-600 font-light">
@@ -1044,7 +1063,7 @@ const Portfolio = () => {
 
                     <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
                       <span className="px-3 py-1.5 bg-pink-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-pink-400/50">
-                         Next.Js
+                        Next.Js
                       </span>
                       <span className="px-3 py-1.5 bg-purple-600/90 backdrop-blur-sm text-white text-sm font-medium rounded-full border border-purple-400/50">
                         🔧 Node.Js
@@ -1084,7 +1103,6 @@ const Portfolio = () => {
                       React Js, and Node.js. It provides a user-friendly
                       interface for managing tasks, with features such as task
                       creation, editing, and deletion.
-
                     </p>
                   </div>
 

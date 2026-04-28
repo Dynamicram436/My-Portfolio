@@ -6,7 +6,6 @@ import profile2 from "../Images/Bharagavram.jpeg";
 import carmechanics from "../Images/hindustan-mechanics.png";
 import diamondpublicschool from "../Images/diamondpublicschool.png";
 import ssplusit from "../Images/ssplusit.png";
-import ecommerce from "../Images/eccommerce.png";
 import Resume from "../pdf/Gvs.Bhargavram Front_End_Developer Resume  1.10 years.pdf";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import redux from "../Images/redux-icon.webp";
@@ -102,16 +101,6 @@ const projects = [
     tech: ["HTML/CSS", "JavaScript", "jQuery"],
     features: ["School Management", "Information Portal", "Classic Design"],
     category: "Education",
-  },
-  {
-    title: "E-commerce Platform",
-    image: ecommerce,
-    link: "https://medium-eccommerce.netlify.app",
-    description:
-      "Full-stack e-commerce solution with advanced state management and payment integration.",
-    tech: ["React.js", "Redux Toolkit", "Zustand"],
-    features: ["Shopping Cart", "State Management", "Payment Integration"],
-    category: "E-Commerce",
   },
   {
     title: "Task-Flow Project",
